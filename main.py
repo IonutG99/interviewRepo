@@ -30,11 +30,22 @@ def check_dict(value):
             if return_value is not None:
                 r_value[k]=return_value
         return r_value
+    # check if there's a nested list
+    elif isinstance(value,list):
+        r_value=[]
+        for item in value:
+            return_value=check_dict(item)
+            if return_value is not None:
+                r_value.append(return_value)
+        return r_value
     else:
         return value
 
 output_dict2=check_dict(test_data2)
 print(output_dict2)
 # current output : {'k1': 'v1', 'k10': {'k12': 'v12'}}
-        
+
+output_dict1=check_dict(test_data1)
+print(output_dict1)
+# output : {'k1': 'v1', 'k2': ['v2', 'v3', {'k21': 'v21'}], 'k3': {'k4': 'v4', 'k5': ['v5', 'v6'], 'k6': {'k7': 'v7'}}, 'k10': {'k12': 'v12'}}   
     
